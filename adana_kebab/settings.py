@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure-r1f@lbjuuxh)nhf44@fbtk%nqb=sropqerkawmfz!ok(@xk-=n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['81.95.232.205', 'adana.uz','127.0.0.1']
+# ALLOWED_HOSTS = ['81.95.232.205', 'adana.uz','127.0.0.1']
+
+ALLOWED_HOSTS=['*']
+CORS_ORIGIN_ALLOW_ALL = True
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
@@ -42,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_yasg',
+    'corsheaders',
     'kebab',
 ]
 
@@ -53,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
