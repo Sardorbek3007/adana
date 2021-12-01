@@ -91,8 +91,16 @@ WSGI_APPLICATION = 'adana_kebab.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'adana',
+
+        'USER': 'postgres',
+
+        'PASSWORD': 'adana',
+
+        'HOST': '127.0.0.1',
+
+        'PORT': '5432',
     }
 }
 
