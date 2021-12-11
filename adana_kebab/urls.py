@@ -49,6 +49,8 @@ router.register('Picture', PictureViewSet)
 router.register('Video', VideoViewSet)
 router.register('Chef', ChefViewSet)
 router.register('Connection', ConnectionViewSet)
+router.register('CardItem', CardItemViewSet)
+router.register('Card', CardViewSet)
 
 
 

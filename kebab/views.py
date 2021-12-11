@@ -74,3 +74,11 @@ class ConnectionViewSet(viewsets.ModelViewSet):
     ordering = ['subject']
     search_fields = ['name']
     filterset_fields = ['name',]
+
+class CardItemViewSet(viewsets.ModelViewSet):
+    queryset = CardItem.objects.all()
+    serializer_class = CardItemSerializer        
+
+class CardViewSet(viewsets.ModelViewSet):
+    queryset = Card.objects.all()
+    serializer_class = CardSerializer
