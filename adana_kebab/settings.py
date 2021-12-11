@@ -45,8 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'knox',
     'django_filters',
     'drf_yasg',
+    'account',
     'kebab',
 ]
 
@@ -61,10 +63,18 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES' : ['knox.auth.TokenAuthentication'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 3,
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
+# #Autentifikatsiya
+# REST_FRAMEWORK = {
+#   'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'knox.auth.TokenAuthentication',
+#   ]
+# }
+
 ROOT_URLCONF = 'adana_kebab.urls'
 
 TEMPLATES = [
@@ -89,18 +99,29 @@ WSGI_APPLICATION = 'adana_kebab.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         # 'ENGINE': 'django.db.backends.postgresql',
+#         # 'NAME': 'adana',
+
+#         # 'USER': 'postgres',
+
+#         # 'PASSWORD': 'adana',
+
+#         # 'HOST': '127.0.0.1',
+
+#         # 'PORT': '5432',
+
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+    
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'adana',
-
-        'USER': 'postgres',
-
-        'PASSWORD': 'adana',
-
-        'HOST': '127.0.0.1',
-
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': str(os.path.join(BASE_DIR, "db.sqlite3"))
     }
 }
 
@@ -142,6 +163,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    'adana/static'
+]
+MEDIA_URL = '/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

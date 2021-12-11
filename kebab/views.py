@@ -25,9 +25,42 @@ class MenyuViewSet(viewsets.ModelViewSet):
     filterset_fields = ['name',]
 
 
+
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+class SpecialViewSet(viewsets.ModelViewSet):
+    queryset = Special.objects.all()
+    serializer_class = SpecialSerializer
+    # authentication_classes = [BasicAuthentication]
+    # permission_classes = [ DjangoModelPermissions]
+    filter_backends = [filters.OrderingFilter,DjangoFilterBackend,filters.SearchFilter]
+    ordering_fields = ['name','price']
+    ordering = ['price']
+    search_fields = ['^name']
+    filterset_fields = ['name',]
+
+
+class Category_1ViewSet(viewsets.ModelViewSet):
+    queryset = Category_1.objects.all()
+    serializer_class = Category_1Serializer
+
+
+class PictureViewSet(viewsets.ModelViewSet):
+    queryset = Picture.objects.all()
+    serializer_class = PictureSerializer
+    
+
+class VideoViewSet(viewsets.ModelViewSet):
+    queryset = Video.objects.all()
+    serializer_class = VideoSerializer
+
+
+class ChefViewSet(viewsets.ModelViewSet):
+    queryset = Chef.objects.all()
+    serializer_class = ChefSerializer
+
 
 
 
@@ -39,5 +72,5 @@ class ConnectionViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.OrderingFilter,DjangoFilterBackend,filters.SearchFilter]
     ordering_fields = ['name','subject']
     ordering = ['subject']
-    search_fields = ['^name']
+    search_fields = ['name']
     filterset_fields = ['name',]

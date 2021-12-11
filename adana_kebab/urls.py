@@ -43,12 +43,20 @@ schema_view = get_schema_view(
 router = DefaultRouter()
 router.register('Menyu', MenyuViewSet)
 router.register('Category', CategoryViewSet)
+router.register('Special', SpecialViewSet)
+router.register('Category_1', Category_1ViewSet)
+router.register('Picture', PictureViewSet)
+router.register('Video', VideoViewSet)
+router.register('Chef', ChefViewSet)
 router.register('Connection', ConnectionViewSet)
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('account/', include("account.urls")),
     path('', include(router.urls)),
-     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc')
 ]
 
