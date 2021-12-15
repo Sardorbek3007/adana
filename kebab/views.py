@@ -18,7 +18,7 @@ class MenyuViewSet(viewsets.ModelViewSet):
     # permission_classes = [ DjangoModelPermissions]
     filter_backends = [filters.OrderingFilter,DjangoFilterBackend,filters.SearchFilter]
     ordering_fields = ['name','price']
-    ordering = ['-id']
+    ordering = ['id']
     search_fields = ['name']
     filterset_fields = ['name',]
 
@@ -35,7 +35,7 @@ class SpecialViewSet(viewsets.ModelViewSet):
     # permission_classes = [ DjangoModelPermissions]
     filter_backends = [filters.OrderingFilter,DjangoFilterBackend,filters.SearchFilter]
     ordering_fields = ['name','price']
-    ordering = ['-id']
+    ordering = ['id']
     search_fields = ['^name']
     filterset_fields = ['name',]
 
