@@ -9,8 +9,6 @@ from rest_framework.permissions import  DjangoModelPermissions
 from rest_framework import viewsets
 from .models import *
 
-class MenyuPageNumberPaginations(PageNumberPagination):
-    page_size = 3
 
 
 class MenyuViewSet(viewsets.ModelViewSet):
