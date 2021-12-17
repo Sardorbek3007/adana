@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.response import Response
 from .serializers import *
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 from django_filters.rest_framework import DjangoFilterBackend
@@ -8,8 +9,14 @@ from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import  DjangoModelPermissions
 from rest_framework import viewsets
 from .models import *
+from rest_framework.decorators import api_view, schema
 
-
+@api_view(['GET'])
+def get_menu(request):
+    menus = Menyu.objects.all()
+    serializer = MenyuSerializer(menus, many=True)
+    
+    return Response(serializer.data)
 
 class MenyuViewSet(viewsets.ModelViewSet):
     queryset = Menyu.objects.all()
@@ -21,6 +28,10 @@ class MenyuViewSet(viewsets.ModelViewSet):
     ordering = ['id']
     search_fields = ['name']
     filterset_fields = ['name',]
+
+    def retrieve(self, request, *args, **kwargs):
+
+        return super().retrieve(request, *args, **kwargs)
 
 
 
