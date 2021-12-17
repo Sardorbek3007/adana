@@ -10,14 +10,18 @@ from rest_framework.permissions import  DjangoModelPermissions
 from rest_framework import viewsets
 from .models import *
 from rest_framework.decorators import api_view, schema
+import json
+from django.http import JsonResponse
 
 @api_view(['GET'])
 def get_menu(request):
     menus = Menyu.objects.all()
-    serializer = MenyuSerializer(menus, many=True)
+    datas = list(menus.values())
+    for data in datas:
+        category = Category.objects.get(id=data["category_id"])
+        data["category_id"] = category.name
+    return JsonResponse(datas, safe=False)
     
-    return Response(serializer.data)
-
 class MenyuViewSet(viewsets.ModelViewSet):
     queryset = Menyu.objects.all()
     serializer_class = MenyuSerializer
@@ -28,10 +32,6 @@ class MenyuViewSet(viewsets.ModelViewSet):
     ordering = ['id']
     search_fields = ['name']
     filterset_fields = ['name',]
-
-    def retrieve(self, request, *args, **kwargs):
-
-        return super().retrieve(request, *args, **kwargs)
 
 
 
