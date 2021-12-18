@@ -11,6 +11,8 @@ class Menyu(models.Model):
 
     def __str__(self):
         return self.name
+    def get_image(self):
+        return self.image.url
 
 class Category(models.Model):
     name = models.CharField(max_length=100)

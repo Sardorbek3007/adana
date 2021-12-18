@@ -22,6 +22,15 @@ def get_menu(request):
         data["category_id"] = category.name
     return JsonResponse(datas, safe=False)
     
+@api_view(['GET'])
+def get_menu(request):
+    menul = Special.objects.all()
+    datas = list(menul.values())
+    for data in datas:
+        category = Category_1.objects.get(id=data["category_id"])
+        data["category_id"] = category.name
+    return JsonResponse(datas, safe=False)
+    
 class MenyuViewSet(viewsets.ModelViewSet):
     queryset = Menyu.objects.all()
     serializer_class = MenyuSerializer
