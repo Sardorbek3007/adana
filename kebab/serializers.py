@@ -8,6 +8,15 @@ class MenyuSerializer(serializers.ModelSerializer):
         model = Menyu
         fields = '__all__'
 
+    def to_representation(self, instance):        
+        data = super().to_representation(instance)
+        categories = {}
+        for category in Category.objects.all().values():
+            categories[category["id"]] = category["name"]            
+                
+        data["category"]=categories[data["category"]]
+        return data
+
 class CategorySerializer(serializers.ModelSerializer):
     menyu = MenyuSerializer(read_only=True, many=True)
 
@@ -20,6 +29,16 @@ class SpecialSerializer(serializers.ModelSerializer):
     class Meta():
         model = Special
         fields = '__all__'
+
+
+    def to_representation(self, instance):        
+        data = super().to_representation(instance)
+        categories = {}
+        for category in Category_1.objects.all().values():
+            categories[category["id"]] = category["name"]            
+                
+        data["category"]=categories[data["category"]]
+        return data
 
 class Category_1Serializer(serializers.ModelSerializer):
     special = SpecialSerializer(read_only=True, many=True)
